@@ -3,6 +3,7 @@
 This test is devided in two parts 'Case A' and 'Case B' according to the assignment by Logius
 
 [DUTCH]
+
 Test Cases – Assessment Ruby on Rails
 Het belangrijke aan de opdrachten is de gebruikte methode en techniek, de user interface is minder belangrijk.
 De opdrachten kan je thuis uitvoeren, dat hoeft niet bij ons op locatie. Graag ontvang ik van je een indicatie wanneer je de opdrachten af kan hebben.
