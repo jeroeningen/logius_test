@@ -15,6 +15,8 @@ ruby install.rb
 ## Testing
 
 For testing I used minitest with the Rspec syntax.
+To complete the tests I used three random images (.jpg, .gif and .png).
+
 Please run the tests as follows
 ```
 ruby test/count_bits_test.rb
