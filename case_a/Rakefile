@@ -1,0 +1,1 @@
+Dir.glob('lib/tasks/*').each { |rake| import rake }
