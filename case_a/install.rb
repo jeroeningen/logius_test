@@ -7,8 +7,8 @@ if file_exists
 end
 
 if !file_exists || STDIN.gets.chomp.upcase == "Y"
-	system("cp .irbrc ~/")
-	puts ".irbrc file successful copied."
+  system("cp .irbrc ~/")
+  puts ".irbrc file successful copied."
 else
   puts "ERROR: .irbrc file not copied."
 end
