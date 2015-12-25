@@ -1,6 +1,6 @@
 # Logius test
 
-** Introduction
+## Introduction
 
 This case implements a 'count bits' function for irb.
 The function count the '0' and '1' bits and return the number of '0' and '1' bits.
