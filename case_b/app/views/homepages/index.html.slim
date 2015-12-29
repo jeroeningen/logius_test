@@ -1,0 +1,19 @@
+= link_to t(".transactions_link"), transactions_path, class: "transactions_link"
+
+.balance= UserPresenter.new(current_user).current_balance
+
+.deposit-form
+  = simple_form_for @user do |f|
+    h1= t(".deposit_amount")
+    = f.input :deposit, input_html: {placeholder: "0.00", value: nil}
+    = f.submit t(".deposit_now")
+
+.transfer-form
+  = simple_form_for @user do |f|
+    h1= t(".transfer_money")
+    = f.simple_fields_for :transfer_money do |f|
+      = f.input :bankaccount_id, collection: @bankaccounts, label: t(".bankaccount")
+      = f.input :amount, input_html: {placeholder: "0.00", value: nil}, label: t(".amount")
+      = f.submit t(".transfer_now")
+
+= link_to t(".logout"), logout_path

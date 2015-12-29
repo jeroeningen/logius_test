@@ -1,0 +1,11 @@
+nl:
+  homepages:
+    index:
+      transactions_link: Ga naar uw transacties.
+      logout: Uitloggen
+      deposit_now: Nu storten
+      transfer_now: Nu overmaken
+      deposit_amount: Geld storten
+      transfer_money: Geld overmaken
+      amount: Bedrag
+      bankaccount: Bankrekening

@@ -1,0 +1,12 @@
+= link_to t(".go_back"), root_path
+h1= t(".transactions")
+table.table
+  tr
+    th= t(".amount")
+    th= t(".comment")
+    th= t(".created_at")
+  - @transactions.each do |transaction|
+    tr
+      td= TransactionPresenter.new(transaction).amount
+      td= transaction.comment
+      td= TransactionPresenter.new(transaction).created_at

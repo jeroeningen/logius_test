@@ -1,0 +1,9 @@
+nl:
+  transactions:
+    index:
+      amount: Bedrag
+      comment: Commentaar
+      transactions: Uw transacties
+      go_back: Ga terug
+      no_transactions: U heeft nog geen transacties.
+      created_at: Aangemaakt op
