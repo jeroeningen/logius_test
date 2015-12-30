@@ -7,6 +7,8 @@ VERDER MET:
 
 ## Introduction
 
+This application simulates a bank where users can deposit money and transfer money to other users.
+
 ## Notes & caveats
 This is a very simple bank-app. I can easily spent weeks on it to add a lot of extra features. In this chapter and in the chapter the chapter TODO's & limitations, I describe features that you can implement, but not required by the excercise.
 

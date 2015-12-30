@@ -1,4 +1,4 @@
-# Count the bits in a file and returns the number of '0' and '1'
+# Count the bits in a file of a given path and returns the number of '0' and '1'
 def count_bits path = nil
   if path.nil? || path == ""
     raise "No path given"
@@ -13,8 +13,7 @@ def count_bits path = nil
       zeros = bits.count("0")
       ones = bits.count("1")
 
-      # Send a new-lined message to STDOUT and return the message a little shorter
-      puts "Found #{ones} bits set to 1\nFound #{zeros} bits set to 0"
+      # Return the couned '0' and '1'
     	"Found #{ones} bits set to 1 & #{zeros} bits set to 0"
     else
       raise "Invalid path given"
