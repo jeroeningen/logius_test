@@ -27,6 +27,13 @@ html
             li= link_to t(".home"), root_path, class: current_path == root_path ? "btn btn-default active" : "btn btn-default"
             li= link_to t(".transactions"), transactions_path, class: current_path == transactions_path ? "btn btn-default active" : "btn btn-default"
 
+      - if current_user.present?
+        div.page-header
+          h1= t(".balance_info")
+
+        div.well
+          p.balance= UserPresenter.new(current_user).current_balance
+
       = yield
 
       - if current_user.present?
