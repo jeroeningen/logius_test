@@ -8,7 +8,7 @@ This application simulates a bank where users can deposit money and transfer mon
 This is a very simple bank-app. I can easily spent weeks on it to add a lot of extra features. In this chapter and in the chapter the chapter TODO's & limitations, I describe features that you can implement, but not required by the excercise.
 
 Please note that this application can not run in real-life. There are too much limitations. For example:
-* I used I18n so we can easily internatiolize the app.
+* I used I18n so we can easily internatiolize the application. Currently the application is only in Dutch.
 * For simplicity I used a very basic login-system using bcrypt. For a more advanced system if you need for example 'roles'; Devise might be a good idea.
 * For performance issues I choose to save the current balance in the bankaccount as 'duplicated data', so we do not have to sum all transactions every time we retrieve the current balance. For now it should be fine if we sum all the transactions. If the app become larger and we have a lot transactions it may lead to performance issues. In my opinion it is the best to overcome the performance issues on the first hand instead of later on. Please note that in the tests, because of using the fixtures, the current_balance is not set. Because I could not find any other bug, then the 'bug' in the tests, I still believe it is the best solution to use 'duplicated data' on the current balance.
 * The precesion of the balance and the transactions amount is only '10'.
