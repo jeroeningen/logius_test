@@ -31,7 +31,7 @@ feature "Users" do
     # Use valid password
     within ".login-form" do
       fill_in :user_email, with: "jeroeningen@gmail.com"
-      fill_in :user_password, with: "123456"
+      fill_in :user_password, with: @default_password
       find("[type=submit]").click
     end
 
@@ -53,7 +53,7 @@ feature "Users" do
   end
 
   scenario "can view their account" do
-    login_for_integration_tests(@jeroen.email, "123456")
+    login_for_integration_tests(@jeroen.email, @default_password)
     assert_equal current_path, root_path
     within ".balance" do
       assert_equal true, page.has_content?("Uw saldo is EUR. 0.00")
@@ -61,7 +61,7 @@ feature "Users" do
   end
 
   scenario "can add deposit when logged in" do
-    login_for_integration_tests(@jeroen.email, "123456")
+    login_for_integration_tests(@jeroen.email, @default_password)
     assert_equal current_path, root_path
     within ".deposit-form" do
       fill_in :user_deposit, with: "211.12"
@@ -77,7 +77,7 @@ feature "Users" do
   end
 
   scenario "can transfer money when logged in" do
-    login_for_integration_tests(@jeroen_transferring_money.email, "123456")
+    login_for_integration_tests(@jeroen_transferring_money.email, @default_password)
     assert_equal current_path, root_path
     within ".transfer-form" do
       select @jan.bankaccount.id, from: :user_transfer_money_bankaccount_id

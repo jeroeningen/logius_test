@@ -33,12 +33,12 @@ describe User do
 
   it "can create a user with a password" do
     # valid password match
-    assert_equal true, User.create(firstname: "Test", lastname: "User", email: "testuser@domain.com", password: "123456", password_confirmation: "123456").errors[:password_confirmation].empty?
+    assert_equal true, User.create(firstname: "Test", lastname: "User", email: "testuser@domain.com", password: @default_password, password_confirmation: @default_password).errors[:password_confirmation].empty?
 
     # invalid password match
-    assert_equal false, User.create(firstname: "Test", lastname: "User", email: "testuser2@domain.com", password: "123456", password_confirmation: "1234").errors[:password_confirmation].empty?
-    assert_equal false, User.create(firstname: "Test", lastname: "User", email: "testuser3@domain.com", password: "123456", password_confirmation: "").errors[:password_confirmation].empty?
-    assert_equal false, User.create(firstname: "Test", lastname: "User", email: "testuser4@domain.com", password: "123456").errors[:password_confirmation].empty?
+    assert_equal false, User.create(firstname: "Test", lastname: "User", email: "testuser2@domain.com", password: @default_password, password_confirmation: "1234").errors[:password_confirmation].empty?
+    assert_equal false, User.create(firstname: "Test", lastname: "User", email: "testuser3@domain.com", password: @default_password, password_confirmation: "").errors[:password_confirmation].empty?
+    assert_equal false, User.create(firstname: "Test", lastname: "User", email: "testuser4@domain.com", password: @default_password).errors[:password_confirmation].empty?
 
     # no password
     assert_equal false, User.create(firstname: "Test", lastname: "User", email: "testuser5@domain.com").errors[:password].empty?

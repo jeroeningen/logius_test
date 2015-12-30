@@ -30,7 +30,13 @@ def login_for_integration_tests(email, password)
   end
 end
 
+
 class ActiveSupport::TestCase
+  # Set the default password. Please note that this does not work for the fixtures
+  def setup
+    @default_password = "123456"  
+  end
+
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 

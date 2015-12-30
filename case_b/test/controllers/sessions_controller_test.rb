@@ -19,7 +19,7 @@ describe SessionsController do
       assert_equal true, request.session[:user_id].blank?
     end
     it "logging in successful" do
-      post :create, user: {email: @jeroen.email, password: "123456", password_confimation: "123456"}
+      post :create, user: {email: @jeroen.email, password: @default_password, password_confimation: @default_password}
       assert_redirected_to root_path
       assert_equal true, request.session[:user_id].present?
     end

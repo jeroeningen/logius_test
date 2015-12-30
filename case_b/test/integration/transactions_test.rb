@@ -17,7 +17,7 @@ feature "Transactions" do
   end
 
   scenario "see no transaction if user is logged in and has no transaction" do
-    login_for_integration_tests(@jeroen.email, "123456")
+    login_for_integration_tests(@jeroen.email, @default_password)
     visit root_path
 
     # go to transactions
@@ -32,7 +32,7 @@ feature "Transactions" do
   end
 
   scenario "see the transactions if user is logged in and has a transaction" do
-    login_for_integration_tests(@jeroen_with_transaction.email, "123456")
+    login_for_integration_tests(@jeroen_with_transaction.email, @default_password)
     visit root_path
 
     # go to transactions
