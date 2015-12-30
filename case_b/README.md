@@ -32,7 +32,12 @@ user = User.create(firstname: "Jeroen", lastname: "Van Ingen", email: "jeroening
 
 And then deposit e.g. EUR. 1000.00 to the bankaccount of the user via the GUI or via the console: as follows
 ```
-user.deposit(1000)
+user.deposit(1000) # "U heeft EUR. 1000.00 gestort."
+```
+
+You can retrieve the current balance via the GUI or via the console as follows:
+```
+user.current_balance # "EUR. 1000.00"
 ```
 
 And then to run your server to see transactions, do deposits and transfer money as follows:
