@@ -40,6 +40,8 @@ You can retrieve the current balance via the GUI or via the console as follows:
 user.current_balance # "EUR. 1000.00"
 ```
 
+Furthermore you can also deposit money and transfer money to other users via the GUI.
+
 And then to run your server to see transactions, do deposits and transfer money as follows:
 ```
 bundle exec rails s
