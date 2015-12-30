@@ -1,6 +1,5 @@
-.col-md-12
-  h1= t(".login")
-  = simple_form_for @user, url: sessions_path, html: {class: "login-form"} do |f|
-    = f.input :email
-    = f.input :password
-    = f.submit t(".login")
+h1= t(".login")
+= simple_form_for @user, url: sessions_path, html: {class: "login-form"} do |f|
+  = f.input :email
+  = f.input :password, required: true
+  = f.submit t(".login"), class: "btn btn-primary"

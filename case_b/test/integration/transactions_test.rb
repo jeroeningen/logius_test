@@ -21,15 +21,12 @@ feature "Transactions" do
     visit root_path
 
     # go to transactions
-    click_link "Ga naar uw transacties."
+    click_link "Transacties"
     assert_equal current_path, transactions_path
     within ".alert-info" do
       assert_equal true, page.has_content?("U heeft nog geen transacties.")
     end
-    within "h1" do
-      assert_equal true, page.has_content?("Uw transacties")
-    end
-    click_link "Ga terug"
+    click_link "Home"
 
     assert_equal current_path, root_path
   end
@@ -39,15 +36,15 @@ feature "Transactions" do
     visit root_path
 
     # go to transactions
-    click_link "Ga naar uw transacties."
+    click_link "Transacties"
     assert_equal current_path, transactions_path
-    within "h1" do
+    within "h2" do
       assert_equal true, page.has_content?("Uw transacties")
     end
     within "table" do
       assert_equal true, page.has_content?("EUR. #{@jeroen_with_transaction.transactions.last.amount}")
     end
-    click_link "Ga terug"
+    click_link "Home"
 
     assert_equal current_path, root_path
   end

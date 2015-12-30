@@ -1,19 +1,25 @@
-= link_to t(".transactions_link"), transactions_path, class: "transactions_link"
+div.page-header
+  h1= t(".balance_info")
 
-.balance= UserPresenter.new(current_user).current_balance
+div.well
+  p.balance= UserPresenter.new(current_user).current_balance
+
+div.page-header
+  h1= t(".deposit_amount")
 
 .deposit-form
   = simple_form_for @user do |f|
-    h1= t(".deposit_amount")
-    = f.input :deposit, input_html: {placeholder: "0.00", value: nil}
-    = f.submit t(".deposit_now")
+    = f.input :deposit, input_html: {placeholder: "0.00", value: nil}, required: true
+    = f.submit t(".deposit_now"), class: "btn btn-primary"
 
+div.page-header
+  h1= t(".transfer_money")
 .transfer-form
   = simple_form_for @user do |f|
-    h1= t(".transfer_money")
     = f.simple_fields_for :transfer_money do |f|
       = f.input :bankaccount_id, collection: @bankaccounts, label: t(".bankaccount")
       = f.input :amount, input_html: {placeholder: "0.00", value: nil}, label: t(".amount")
-      = f.submit t(".transfer_now")
+      = f.input :comment, input_html: {value: nil}, label: t(".comment"), required: false
+      = f.submit t(".transfer_now"), class: "btn btn-primary"
 
-= link_to t(".logout"), logout_path
+hr

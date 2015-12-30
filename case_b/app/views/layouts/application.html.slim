@@ -10,10 +10,25 @@ html
 
   body
     .container
+      // flash_mmessages
       - if flash[:info].present?
         .alert.alert-info= flash[:info]
       - if flash[:notice].present?
         .alert.alert-warning= flash[:notice]
       - if flash[:error].present?
         .alert.alert-danger= flash[:error]
+
+      h1= t(".welcome_to_ruby_bank")
+
+      - if current_user.present?
+        // navbar
+        nav.navbar
+          ul.navbar-nav.nav
+            li= link_to t(".home"), root_path, class: current_path == root_path ? "btn btn-default active" : "btn btn-default"
+            li= link_to t(".transactions"), transactions_path, class: current_path == transactions_path ? "btn btn-default active" : "btn btn-default"
+
       = yield
+
+      - if current_user.present?
+        div
+          p= link_to t(".logout"), logout_path, class: "btn btn-primary"

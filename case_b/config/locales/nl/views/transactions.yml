@@ -4,6 +4,7 @@ nl:
       amount: Bedrag
       comment: Commentaar
       transactions: Uw transacties
-      go_back: Ga terug
       no_transactions: U heeft nog geen transacties.
       created_at: Aangemaakt op
+      foreign_bankaccount_number: Tegenrekening
+      foreign_bankaccount_name: Houder tegenrekening

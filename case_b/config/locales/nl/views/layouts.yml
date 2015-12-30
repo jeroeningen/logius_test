@@ -1,0 +1,7 @@
+nl:
+  layouts:
+    application:
+      welcome_to_ruby_bank: Welkom bij de Ruby Bank
+      home: Home
+      transactions: Transacties
+      logout: Uitloggen

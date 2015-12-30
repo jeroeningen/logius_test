@@ -81,11 +81,12 @@ feature "Users" do
     within ".transfer-form" do
       select @jan.bankaccount.id, from: :user_transfer_money_bankaccount_id
       fill_in :user_transfer_money_amount, with: "100.12"
+      fill_in :user_transfer_money_comment, with: "Mijn commentaar"
       find("[type=submit]").click
     end
 
     within ".alert-info" do
-      assert_equal true, page.has_content?("U heeft EUR. 100.12 overgemaakt naar bankrekening '#{@jan.bankaccount.id}'.")
+      assert_equal true, page.has_content?("U heeft EUR. 100.12 overgemaakt naar bankrekening '#{@jan.bankaccount.id}' van #{@jan.firstname} #{@jan.lastname}.")
     end
     within ".balance" do
       assert_equal true, page.has_content?("Uw saldo is EUR. 99.88")

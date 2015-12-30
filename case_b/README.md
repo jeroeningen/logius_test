@@ -1,12 +1,7 @@
 VERDER MET:
-- transactions view
 - al het gemaakte controleren
-- tests fixen
 - hele applicatie op I18n doorlopen
-- tests afmaken
 - checken voor session hijacking
-- in test: password vastzetten
-- only implement the application_helper if necessary
 
 # Ruby Bank
 
@@ -18,14 +13,13 @@ This is a very simple bank-app. I can easily spent weeks on it to add a lot of e
 Please note that this application can not run in real-life. There are too much limitations. For example:
 * I used I18n so we can easily internatiolize the app.
 * For simplicity I used a very basic login-system using bcrypt. For a more advanced system if you need for example 'roles'; Devise might be a good idea.
-* For performance issues I choose to save the current balance in the bankaccount, so we do not have to sum all transactions every time we retrieve the current balance. For now it should be fine if we sum all the transactions. If the app become larger and we have a lot transactions it may lead to performance issues. In my opinion it is the best to overcome the performance issues on the first hand instead of later on. Please note that in the tests, because of using the fixtures, the current_balance is not set. Because I could not find any other bug, then the 'bug' in the tests, I still believe this is the best solution.
+* For performance issues I choose to save the current balance in the bankaccount as 'duplicated data', so we do not have to sum all transactions every time we retrieve the current balance. For now it should be fine if we sum all the transactions. If the app become larger and we have a lot transactions it may lead to performance issues. In my opinion it is the best to overcome the performance issues on the first hand instead of later on. Please note that in the tests, because of using the fixtures, the current_balance is not set. Because I could not find any other bug, then the 'bug' in the tests, I still believe it is the best solution to use 'duplicated data' on the current balance.
 * The precesion of the balance and the transactions amount is only '10'.
-* The used currency is always euro's
-* Bigdecimals with a too large scale (greather than 2) are automatically converted to a scale of 2
+* The used currency is always euro's.
+* Bigdecimals with a too large scale (greather than 2) are automatically converted to a scale of 2 by the database.
 * For simplicity I used a 'dot' instead of a comma for the cents in every amount.
 * Weak passwords are allowed.
 
-TODO
 
 ## Installation
 
@@ -39,7 +33,7 @@ First you need to create a user via the console as follows:
 user = User.create(firstname: "Jeroen", lastname: "Van Ingen", email: "jeroeningen@gmail.com", password: "123456", password_confirmation: "123456")
 ```
 
-And then deposit e.g. EUR. 1000.00 to the bankaccount of the user via the GUI or the the console: as follows
+And then deposit e.g. EUR. 1000.00 to the bankaccount of the user via the GUI or via the console: as follows
 ```
 user.deposit(1000)
 ```
@@ -49,23 +43,41 @@ And then to run your server to see transactions, do deposits and transfer money 
 bundle exec rails s
 ```
 
-TODO
+
+## Functional design
+
+The stucture of the database is very simple. A user can have one bankacount. Every bankaccount can have many transactions.
+
+When a user do a deposit; bascally a transaction is added with a positive amount.
+
+When a user A transfers money to user B, two transactions are added. One outgoing tranaction with a negative amount for the bankaccount of user A and one incoming transaction with a positive amount for the bankaccount of user B.
+
+Every time a transaction is added to a bankaccount; the current balance on the bankaccount is updated.
+
+Every user has an overview of their transactions.
+
 
 ## Testing
 
 For testing I used minitest with the Rspec syntax.
+
 Please run the tests as follows
 ```
 bundle exec rake
 ```
 This app has a lot of tests, because I assume DigID is an application that must be highly tested.
+
 Please note that I use a lot 'assert_equal'. That is because I could not get the 'assert' function properly working.
+
 As you can see in the tests I use the password '123456'. As long as weak passwords are allowed, this is OK.
 
-TODO
+
+## Known bugs
+* The application accepts BigDecimals with a scale larger then 2 as input. e.g. EUR. 10.003. Nevertheless, the database will round it to a scale of 2 itself. But still its is ugly, that the application accepts a scale larger then 2 as input.
 
 ## TODO's & limitations
 Please note that according to the excercise the following points are not required, but for me personally it would be the next points to implement
+* Accepts BigDecimals with a scale not larger then 2 as input.
 * Strong passwords are not implemented.
 * implement a role-based system (like Devise) to add roles
 * Add a capistrano-script or even better, create a Docker image for easy deployment

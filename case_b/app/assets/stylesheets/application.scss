@@ -15,3 +15,13 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+/**
+ * Some basic styles
+ */
+.container {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  padding: 2em;
+  border: solid 1px grey;
+}

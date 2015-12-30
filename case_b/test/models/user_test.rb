@@ -54,14 +54,14 @@ describe User do
     assert_equal "U heeft EUR. 150.15 gestort.", @jeroen.deposit(150.15)
     assert_equal 1, @jeroen.transactions.count
     assert_equal 150.15, @jeroen.transactions.last.amount
-    assert_equal "Gestort: EUR. 150.15.", @jeroen.transactions.last.comment
+    assert_equal "Gestort: EUR. 150.15", @jeroen.transactions.last.comment
     assert_equal "EUR. 150.15", @jeroen.current_balance
 
     # params from the controller wil give a string
     assert_equal "U heeft EUR. 10.50 gestort.", @jeroen.deposit("10.50")
     assert_equal 2, @jeroen.transactions.count
     assert_equal 10.50, @jeroen.transactions.last.amount
-    assert_equal "Gestort: EUR. 10.50.", @jeroen.transactions.last.comment
+    assert_equal "Gestort: EUR. 10.50", @jeroen.transactions.last.comment
     assert_equal "EUR. 160.65", @jeroen.current_balance
   end
 
@@ -73,14 +73,14 @@ describe User do
 
   it "cannot transfer_money to other bankaccounts if the current_balance is too low" do
     # Do not transfer money if you have not enough balance
-    assert_equal "U kunt geen negatief bedrag overmaken.", @jeroen.transfer_money(@jan.bankaccount.id, -0.01)
-    assert_equal "U heeft onvoldoende saldo.", @jeroen.transfer_money(@jan.bankaccount.id, 0.01)
+    assert_equal "U kunt geen negatief bedrag overmaken.", @jeroen.transfer_money(@jan.bankaccount.id, -0.01, "")
+    assert_equal "U heeft onvoldoende saldo.", @jeroen.transfer_money(@jan.bankaccount.id, 0.01, "")
   end
 
-  it "transfer nothing if no bankaccount or no value given" do
-    assert_equal "U moet een bankrekening opgeven.", @jeroen_transferring_money.transfer_money("", 100)
-    assert_equal "U moet een bedrag opgeven.", @jeroen_transferring_money.transfer_money(@jan.bankaccount.id, "")
-    assert_equal "U moet een bedrag opgeven.", @jeroen_transferring_money.transfer_money(@jan.bankaccount.id, 0.0)
+  it "transfer nothing if no bankaccount or no amount given" do
+    assert_equal "U moet een bankrekening opgeven.", @jeroen_transferring_money.transfer_money("", 100, "")
+    assert_equal "U moet een bedrag opgeven.", @jeroen_transferring_money.transfer_money(@jan.bankaccount.id, "", "")
+    assert_equal "U moet een bedrag opgeven.", @jeroen_transferring_money.transfer_money(@jan.bankaccount.id, 0.0, "")
     assert_equal 0, @jeroen.transactions.count
   end
 
@@ -90,27 +90,31 @@ describe User do
 
     # Transfer money and add transactions
     # transfer EUR. 100.00
-    assert_equal "U heeft EUR. 100.00 overgemaakt naar bankrekening '#{@jan.bankaccount.id}'.", @jeroen.transfer_money(@jan.bankaccount.id, 100.0)
+    assert_equal "U heeft EUR. 100.00 overgemaakt naar bankrekening '#{@jan.bankaccount.id}' van #{@jan.firstname} #{@jan.lastname}.", @jeroen.transfer_money(@jan.bankaccount.id, 100.0, "Dit is commentaar")
     assert_equal "EUR. 150.15", @jeroen.current_balance
     assert_equal 2, @jeroen.transactions.count
     assert_equal -100.0, @jeroen.transactions.last.amount
-    assert_equal "EUR. 100.00 overgemaakt naar bankrekening: #{@jan.bankaccount.id}", @jeroen.transactions.last.comment
+    assert_equal "Dit is commentaar", @jeroen.transactions.last.comment
+    assert_equal @jan.bankaccount.id, @jeroen.transactions.last.foreign_bankaccount_id
     assert_equal "EUR. 150.15", @jeroen.current_balance
     assert_equal "EUR. 100.00", @jan.current_balance
     assert_equal 1, @jan.transactions.count
     assert_equal 100.0, @jan.transactions.last.amount
-    assert_equal "EUR. 100.00 ontvangen van bankrekening: #{@jeroen.bankaccount.id}", @jan.transactions.last.comment
+    assert_equal @jeroen.bankaccount.id, @jan.transactions.last.foreign_bankaccount_id
+    assert_equal "Dit is commentaar", @jan.transactions.last.comment
 
     # transfer EUR. 150.15, params from the contrller will give a string
-    assert_equal "U heeft EUR. 150.15 overgemaakt naar bankrekening '#{@jan.bankaccount.id}'.", @jeroen.transfer_money(@jan.bankaccount.id, "150.15")
+    assert_equal "U heeft EUR. 150.15 overgemaakt naar bankrekening '#{@jan.bankaccount.id}' van #{@jan.firstname} #{@jan.lastname}.", @jeroen.transfer_money(@jan.bankaccount.id, "150.15", "Dit is nog meer commentaar")
     assert_equal "EUR. 0.00", @jeroen.current_balance
     assert_equal 3, @jeroen.transactions.count
     assert_equal -150.15, @jeroen.transactions.last.amount
-    assert_equal "EUR. 150.15 overgemaakt naar bankrekening: #{@jan.bankaccount.id}", @jeroen.transactions.last.comment
+    assert_equal @jan.bankaccount.id, @jeroen.transactions.last.foreign_bankaccount_id
+    assert_equal "Dit is nog meer commentaar", @jeroen.transactions.last.comment
     assert_equal "EUR. 0.00", @jeroen.current_balance
     assert_equal "EUR. 250.15", @jan.current_balance
     assert_equal 2, @jan.transactions.count
     assert_equal 150.15, @jan.transactions.last.amount
-    assert_equal "EUR. 150.15 ontvangen van bankrekening: #{@jeroen.bankaccount.id}", @jan.transactions.last.comment
+    assert_equal @jeroen.bankaccount.id, @jan.transactions.last.foreign_bankaccount_id
+    assert_equal "Dit is nog meer commentaar", @jan.transactions.last.comment
   end
 end

@@ -13,11 +13,9 @@ nl:
           zero_deposit_not_allowed: U moet een bedrag opgeven.
           negative_transfer_not_allowed: U kunt geen negatief bedrag overmaken.
           zero_transfer_not_allowed: U moet een bedrag opgeven.
-          deposit: "Gestort: EUR. %{amount}."
+          deposit: "Gestort: EUR. %{amount}"
           deposit_added: "U heeft EUR. %{amount} gestort."
-          transferred_to: "EUR. %{amount} overgemaakt naar bankrekening: %{bankaccount_id}"
-          transferred_from: "EUR. %{amount} ontvangen van bankrekening: %{bankaccount_id}"
-          amount_transfered: "U heeft EUR. %{amount} overgemaakt naar bankrekening '%{bankaccount_id}'."
+          amount_transfered: "U heeft EUR. %{amount} overgemaakt naar bankrekening '%{bankaccount_id}' van %{firstname} %{lastname}."
           no_bankaccount: "U moet een bankrekening opgeven."
     errors:
       models:

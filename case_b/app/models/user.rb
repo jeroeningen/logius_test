@@ -29,12 +29,13 @@ class User < ActiveRecord::Base
       I18n.t("activerecord.messages.models.user.negative_deposit_not_allowed")
     else
       translated_amount = sprintf('%.2f', amount)
-      Transaction.create(bankaccount_id: bankaccount.id, amount: amount, comment: I18n.t("activerecord.messages.models.user.deposit", amount: translated_amount))
+      Transaction.create(bankaccount_id: bankaccount.id, amount: amount, 
+        comment: I18n.t("activerecord.messages.models.user.deposit", amount: translated_amount))
       I18n.t("activerecord.messages.models.user.deposit_added", amount: translated_amount)
     end
   end
 
-  def transfer_money bankaccount_id, amount
+  def transfer_money bankaccount_id, amount, comment
     # if the given param is a string, convert it to an integer
     amount = amount.to_d if amount.present?
     # check if bankaccount is given
@@ -50,12 +51,14 @@ class User < ActiveRecord::Base
       I18n.t("activerecord.messages.models.user.not_enough_balance")
     else
       translated_amount = sprintf('%.2f', amount)
-      # Transferred from
-      Transaction.create(bankaccount_id: bankaccount.id, amount: -amount, comment: I18n.t("activerecord.messages.models.user.transferred_to", amount: translated_amount, bankaccount_id: bankaccount_id))
+      transferred_from = Bankaccount.find(bankaccount.id).user
+      transferred_to = Bankaccount.find(bankaccount_id).user
+      # Transaction 'Transferred from'
+      Transaction.create(bankaccount_id: bankaccount.id, foreign_bankaccount_id: bankaccount_id, amount: -amount, comment: comment)
 
-      # Transferred to
-      Transaction.create(bankaccount_id: bankaccount_id, amount: amount, comment: I18n.t("activerecord.messages.models.user.transferred_from", amount: translated_amount, bankaccount_id: bankaccount.id))
-      I18n.t("activerecord.messages.models.user.amount_transfered", amount: translated_amount, bankaccount_id: bankaccount_id)
+      # Transaction 'Transferred to'
+      Transaction.create(bankaccount_id: bankaccount_id, foreign_bankaccount_id: bankaccount.id, amount: amount,  comment: comment)
+      I18n.t("activerecord.messages.models.user.amount_transfered", amount: translated_amount, bankaccount_id: bankaccount_id, firstname: transferred_to.firstname, lastname: transferred_to.lastname)
     end
   end
 

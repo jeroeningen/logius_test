@@ -16,10 +16,12 @@ describe SessionsController do
     it "fails to log in" do
       post :create, user: {email: @jeroen.email, password: "12345"}
       assert_redirected_to new_session_path
+      assert_equal true, request.session[:user_id].blank?
     end
     it "logging in successful" do
       post :create, user: {email: @jeroen.email, password: "123456", password_confimation: "123456"}
       assert_redirected_to root_path
+      assert_equal true, request.session[:user_id].present?
     end
     it "logout" do
       login_for_controller_tests @jeroen

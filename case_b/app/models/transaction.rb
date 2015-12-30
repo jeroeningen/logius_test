@@ -1,5 +1,6 @@
 class Transaction < ActiveRecord::Base
   belongs_to :bankaccount
+  belongs_to :foreign_bankaccount, class_name: "Bankaccount"
 
   validates :amount, presence: true
 

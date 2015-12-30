@@ -23,14 +23,16 @@ ActiveRecord::Schema.define(version: 20151227152602) do
   add_index "bankaccounts", ["user_id"], name: "index_bankaccounts_on_user_id"
 
   create_table "transactions", force: :cascade do |t|
-    t.integer  "bankaccount_id",                          default: 0,   null: false
-    t.decimal  "amount",         precision: 10, scale: 2, default: 0.0, null: false
+    t.integer  "bankaccount_id",                                  default: 0,   null: false
+    t.integer  "foreign_bankaccount_id",                          default: 0,   null: false
+    t.decimal  "amount",                 precision: 10, scale: 2, default: 0.0, null: false
     t.text     "comment"
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
   end
 
   add_index "transactions", ["bankaccount_id"], name: "index_transactions_on_bankaccount_id"
+  add_index "transactions", ["foreign_bankaccount_id"], name: "index_transactions_on_foreign_bankaccount_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "firstname",       default: "", null: false
