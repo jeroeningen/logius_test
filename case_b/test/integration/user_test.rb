@@ -8,6 +8,7 @@ feature "Users" do
     # set the balance manually, because the fixtures will not do it
     @jeroen_transferring_money.bankaccount.update_attribute :balance, @jeroen_transferring_money.transactions.sum(:amount)
   end
+  
   scenario "can login and logout" do
     visit root_path
 

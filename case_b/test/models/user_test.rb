@@ -57,7 +57,7 @@ describe User do
     assert_equal "Gestort: EUR. 150.15", @jeroen.transactions.last.comment
     assert_equal "EUR. 150.15", @jeroen.current_balance
 
-    # params from the controller wil give a string
+    # params from the controller will give a string
     assert_equal "U heeft EUR. 10.50 gestort.", @jeroen.deposit("10.50")
     assert_equal 2, @jeroen.transactions.count
     assert_equal 10.50, @jeroen.transactions.last.amount

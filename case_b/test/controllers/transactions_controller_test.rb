@@ -9,7 +9,7 @@ describe TransactionsController do
     end
   end
 
-  # Please note that the login-method can be put in a before-each loop. This is not done, because it was called also for the other context
+  # Please note that the login-method should be put in a before-each loop. This is not done, because it was called also for the other context
   context "with login" do
     it "index" do
       login_for_controller_tests User.where(email: "jeroeningen@gmail.com").first

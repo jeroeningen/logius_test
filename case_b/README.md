@@ -1,8 +1,3 @@
-VERDER MET:
-- al het gemaakte controleren
-- hele applicatie op I18n doorlopen
-- checken voor session hijacking
-
 # Ruby Bank
 
 ## Introduction
