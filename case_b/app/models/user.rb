@@ -68,6 +68,8 @@ class User < ActiveRecord::Base
     true
   end
 
+  # I do not know why, but it looks to be that the 'password_confirmation match' from has_secure_password does not work out-of-the-box
+  # That is why I added this validation
   def password_match_password_confirmation
     if password != password_confirmation
       errors.add(:password_confirmation, I18n.t(".activerecord.errors.models.user.attributes.password_confirmation"))
