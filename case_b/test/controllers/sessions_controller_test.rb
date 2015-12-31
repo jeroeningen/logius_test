@@ -11,7 +11,7 @@ describe SessionsController do
 
   context "create a session" do
     before(:each) do
-      @jeroen = User.where(email: "jeroeningen@gmail.com").first
+      @jeroen = users(:jeroen)
     end
     it "fails to log in" do
       post :create, user: {email: @jeroen.email, password: "12345"}

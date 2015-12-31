@@ -87,3 +87,6 @@ Please note that according to the excercise the following points are not require
 * Add a capistrano-script or even better, create a Docker image for easy deployment
 * Localize the currencies instead of always using a 'dot' for the cents.
 * Implement other currencies, including a currency-conversion
+
+## Contact
+If you have any further questions, please contact me at jeroeningen@gmail.com

@@ -3,10 +3,10 @@ describe User do
   should have_one(:bankaccount)
   should have_many(:transactions)
 
-  should validate_presence_of :firstname
-  should validate_presence_of :lastname
-  should validate_presence_of :email
-  should validate_uniqueness_of :email
+  should validate_presence_of(:firstname)
+  should validate_presence_of(:lastname)
+  should validate_presence_of(:email)
+  should validate_uniqueness_of(:email)
   should allow_value("test@test.nl").for(:email)
   should_not allow_value("test@test").for(:email)
 

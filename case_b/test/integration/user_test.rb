@@ -17,7 +17,7 @@ feature "Users" do
 
     # Use invalid password
     within ".login-form" do
-      fill_in :user_email, with: "jeroeningen@gmail.com"
+      fill_in :user_email, with: @jeroen.email
       fill_in :user_password, with: "12345"
       find("[type=submit]").click
     end
@@ -30,7 +30,7 @@ feature "Users" do
 
     # Use valid password
     within ".login-form" do
-      fill_in :user_email, with: "jeroeningen@gmail.com"
+      fill_in :user_email, with: @jeroen.email
       fill_in :user_password, with: @default_password
       find("[type=submit]").click
     end
