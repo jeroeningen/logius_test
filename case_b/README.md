@@ -25,6 +25,11 @@ Before running the application, Please setup your database with SQLite and run t
 bundle exec rake db:migrate
 ```
 
+You can run the (Rails) console as follows
+```
+bundle exec rails c
+```
+
 First you need to create a user via the console as follows:
 ```
 user = User.create(firstname: "Jeroen", lastname: "Van Ingen", email: "jeroeningen@gmail.com", password: "123456", password_confirmation: "123456")
